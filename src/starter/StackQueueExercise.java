@@ -1,5 +1,6 @@
 package starter;// Program that demonstrates some stack/queue operations
 
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -36,13 +37,27 @@ public class StackQueueExercise {
     // pre : count >= 0
     // post: returns a queue of count multiples of n
     public static Queue<Integer> makeQueueOfMultiples(int count, int n) {
-        return null;
+        Queue<Integer>  q = new LinkedList<>();
+
+        for(int i = 1 ; i <= count ; i++){
+            q.add(i * n);
+        }
+//        int i = 1;
+//        while(q.size() < count){
+//            q.add(n * i);
+//            i++;
+//        }
+        return q;
     }
 
     // pre : count >= 0
     // post: returns a stack of count multiples of n
     public static Stack<Integer> makeStackOfMultiples(int count, int n) {
-        return null;
+        Stack<Integer> s = new Stack<>();
+        for(int i = 1 ; i <= count ; i++){
+            s.push(i * n);
+        }
+        return s;
     }
 
     // post: Values from q moved to s (added in queue order, front to back);
@@ -67,9 +82,69 @@ public class StackQueueExercise {
 
     // post: returns the sum of the values in s
     // This method should NOT change the content of s after the call
+    // You may use queue as your additional storage
     public static int sum(Stack<Integer> s) {
+        Queue<Integer> q = new LinkedList<>();
         int sum = 0;
+
         //implement me
+        while (!s.isEmpty()) {
+            int n = s.pop();
+            q.add(n);
+            sum += n;
+        }
+
+        //s is empty!!!
+        //q is full (12, 9, 6, 3)
+        //move all elements in q to s
+        while (!q.isEmpty()) {
+            s.push(q.remove());
+        }
+        //s = 3, 6, 9, 12
+
+        //s -> q
+        while(!s.empty()){
+            q.add(s.pop());
+        }
+        //s is empty
+        //q is full (3,6, 9,12)
+        //q -> s
+        while(!q.isEmpty()){
+            s.push(q.remove());
+        }
         return sum;
+
+    }
+    public static int sum2(Stack<Integer> s) {
+        Queue<Integer> q = new LinkedList<>();
+        int sum = 0;
+        //add for loop for alternative solution
+        //implement me
+        while (!s.isEmpty()) {
+            int n = s.pop();
+            q.add(n);
+            sum += n;
+        }
+
+        //s is empty!!!
+        //q is full (12, 9, 6, 3)
+        //move all elements in q to s
+        while (!q.isEmpty()) {
+            s.push(q.remove());
+        }
+        //s = 3, 6, 9, 12
+
+//        //s -> q
+//        while(!s.empty()){
+//            q.add(s.pop());
+//        }
+//        //s is empty
+//        //q is full (3,6, 9,12)
+//        //q -> s
+//        while(!q.isEmpty()){
+//            s.push(q.remove());
+//        }
+        return sum;
+
     }
 }

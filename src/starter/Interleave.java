@@ -15,7 +15,8 @@ public class Interleave {
             q.add(i);
         }
         interleave(q);
-        System.out.println(q); //desired result is [1, 100, 2, 200, 3, 300, 4, 400]
+        System.out.println(q); //desired result is
+        // [1, 100, 2, 200, 3, 300, 4, 400]
     }
 
     public static void interleave(Queue<Integer> q) {
